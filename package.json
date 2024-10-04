@@ -9,8 +9,10 @@
   },
   "private": true,
   "dependencies": {
+    "@appbuilder/react": "file:../../../../Downloads/agora-app-builder-new/Builds/react-sdk/appbuilder-react-3.0.24-sRHFLN1ZXL.tgz",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "vite-plugin-dts": "^4.2.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",

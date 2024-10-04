@@ -3,6 +3,8 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
+import dts from 'vite-plugin-dts';
+import * as path from 'path';
 
 export default defineConfig({
   root: __dirname,
@@ -18,7 +20,14 @@ export default defineConfig({
     host: 'localhost',
   },
 
-  plugins: [react(), nxViteTsPaths(), nxCopyAssetsPlugin(['*.md'])],
+  plugins: [
+    react(),
+    nxViteTsPaths(),
+    dts({
+      entryRoot: 'src',
+      tsconfigPath: path.join(__dirname, 'tsconfig.app.json'),
+    }),
+  ],
 
   // Uncomment this if you are using workers.
   // worker: {
@@ -28,9 +37,25 @@ export default defineConfig({
   build: {
     outDir: './dist/org',
     emptyOutDir: true,
-    reportCompressedSize: true,
+    reportCompressedSize: false,
     commonjsOptions: {
       transformMixedEsModules: true,
+    },
+    rollupOptions: {
+      // External packages that should not be bundled into your library.
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        '@mui/material',
+        '@mui/system',
+        '@mui/styles',
+      ],
+      // output: {
+      //   manualChunks: {
+      //     mui: ["@mui/material", "@mui/system", "@mui/styles"],
+      //   },
+      // },
     },
   },
 
