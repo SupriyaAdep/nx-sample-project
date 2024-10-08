@@ -2,13 +2,13 @@
 import styles from './app.module.css';
 
 import AgoraAppBuilder from '@appbuilder/react';
-console.log('supriya AppBuilderWebSdkApi: ', AgoraAppBuilder);
+console.log('AgoraAppBuilder: ', AgoraAppBuilder);
 
 export function App() {
   return (
     <div>
       {/* <NxWelcome title="org" /> */}
-      <div style={{ display: 'flex', width: '100vw', height: '550px' }}>
+      <div className={styles.agoraWrapper}>
         <AgoraAppBuilder.View />
       </div>
     </div>
